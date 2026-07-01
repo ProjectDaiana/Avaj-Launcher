@@ -1,27 +1,16 @@
 package ro.academyplus.avaj.simulator;
 
-public class Helicopter extends Aircraft  {
+public class Helicopter extends Aircraft {
     public Helicopter(long p_id, String p_name, Coordinates p_coordinate) {
-        //TYPE#NAME(UNIQUE_ID): SPECIFIC_MESSAGE.
-        system
+        super(p_id, p_name, p_coordinate);
+        System.out.println("Helicopter#" + p_name + "(" + p_id + "): registered to weather tower.");
     }
-    public void updateConditions() {
-        String weather = getWeather(p_coordinate) {
-            case weather = SUN {
-                lon_increment += 10;
-                h_increment += 2;
-            }
-            case weather = RAIN {
-                lon_increment += 5;
-            }
-            case weahter = FOG {
-                lon_increment += 1;
-            }
-            case weather = SNOW {
-                h_increment -= 12;
-            }
 
-        }
-        this.coordinates = Coordinates(this.p_longitude + lon_increment, this.p_latitude + lat_increment , this.p_height + h_increment)
-    }
+    @Override protected String getType() { return "Helicopter"; }
+
+    // increments: {longitude, latitude, height}
+    @Override protected int[] onSun()  { return new int[]{ 10, 0,   2}; }
+    @Override protected int[] onRain() { return new int[]{  5, 0,   0}; }
+    @Override protected int[] onFog()  { return new int[]{  1, 0,   0}; }
+    @Override protected int[] onSnow() { return new int[]{  0, 0, -12}; }
 }
