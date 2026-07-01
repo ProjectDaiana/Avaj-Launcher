@@ -1,3 +1,5 @@
+package ro.academyplus.avaj.simulator;
+
 public class WeatherProvider {
     private static WeatherProvider instance;
     private String[] weather;
