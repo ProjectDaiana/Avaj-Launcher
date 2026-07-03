@@ -12,5 +12,5 @@ public class Balloon extends Aircraft {
     @Override protected int[] onSun()  { return new int[]{ 2, 0,  4}; }
     @Override protected int[] onRain() { return new int[]{ 0, 0, -5}; }
     @Override protected int[] onFog()  { return new int[]{ 0, 0, -3}; }
-    @Override protected int[] onSnow() { return new int[]{ 0, 0,  0}; }
+    @Override protected int[] onSnow() { return new int[]{ 0, 0,  -15}; }
 }
