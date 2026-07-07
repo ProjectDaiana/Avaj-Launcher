@@ -11,11 +11,20 @@ public abstract class Aircraft extends Flyable {
         this.coordinates = p_coordinate;
     }
 
+    @Override
+    public String toString() {
+        return getType() + "#" + name + "(" + id + ")";
+    }
+
     protected abstract String getType();
     protected abstract int[] onSun();
     protected abstract int[] onRain();
     protected abstract int[] onFog();
     protected abstract int[] onSnow();
+    protected abstract String onSunMessage();
+    protected abstract String onRainMessage();
+    protected abstract String onFogMessage();
+    protected abstract String onSnowMessage();
 
     @Override
     public final void updateConditions() {
@@ -30,8 +39,8 @@ public abstract class Aircraft extends Flyable {
 
         int newHeight = this.coordinates.getHeight() + inc[2];
         if (newHeight <= 0) {
+            System.out.println(this + " landing.");
             weatherTower.unregister(this);
-            System.out.println(getType() + "#" + name + "(" + id + "): landing.");
             return;
         }
 
@@ -40,6 +49,14 @@ public abstract class Aircraft extends Flyable {
             this.coordinates.getLatitude()  + inc[1],
             newHeight
         );
-        System.out.println(getType() + "#" + name + "(" + id + "): " + weather + ".");
+
+        String message = switch (weather) {
+            case WeatherProvider.SUN  -> onSunMessage();
+            case WeatherProvider.RAIN -> onRainMessage();
+            case WeatherProvider.FOG  -> onFogMessage();
+            case WeatherProvider.SNOW -> onSnowMessage();
+            default -> "...";
+        };
+        System.out.println(this + ": " + message);
     }
 }

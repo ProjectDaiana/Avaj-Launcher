@@ -6,8 +6,8 @@ public class WeatherProvider {
     public static final String FOG  = "FOG";
     public static final String SNOW = "SNOW";
 
+    private static final String[] weather = { RAIN, FOG, SUN, SNOW };
     private static WeatherProvider instance;
-    private String[] weather;
 
     private WeatherProvider() {}
 
@@ -19,7 +19,7 @@ public class WeatherProvider {
     }
 
     public String getCurrentWeather(Coordinates p_coordinates) {
-        // TODO: implement
-        return null;
+        int index = (p_coordinates.getLongitude() + p_coordinates.getLatitude() + p_coordinates.getHeight()) % 4;
+        return weather[index];
     }
 }
