@@ -140,16 +140,3 @@ Italic names (like *Flyable*) mean the class is **abstract**: it cannot be insta
 - private static instance      → the single instance
 - public static getInstance()  → the global access point
 ```
-
----
-
-## 3. Reading the Diagram Top-to-Bottom
-
-A quick tour, so you can rebuild the mental model at a glance:
-
-1. **Top row** — the observer machinery: `Tower` (subject) and `Flyable` (observer) sit at the top because everything else plugs into them.
-2. **Second row** — the concrete pieces: `WeatherTower` (concrete subject on the left), `Coordinates` (value object in the middle), `Aircraft` (concrete observer, abstract-ish base on the right).
-3. **Third row** — the singleton services on the left (`WeatherProvider`), and the three concrete aircraft in the middle/right.
-4. **Bottom** — `AircraftFactory`, the one door through which all aircraft come into existence.
-
-The data flow reads roughly right-to-left: **Factory → Aircraft → registers with → WeatherTower → asks → WeatherProvider → notifies back → Aircraft**.
